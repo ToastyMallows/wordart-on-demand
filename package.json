@@ -1,0 +1,17 @@
+{
+	"name": "wordartondemand",
+	"version": "0.0.1",
+	"description": "generate 90s wordart from a node script or docker container",
+	"scripts": {
+		"test": "node index.js --word Example"
+	},
+	"author": "Ross Lancaster",
+	"license": "MIT",
+	"dependencies": {
+		"command-line-args": "^5.1.1",
+		"gm": "^1.23.1",
+		"object.observe": "^0.2.6",
+		"puppeteer": "^5.4.0",
+		"replace-in-file": "^6.1.0"
+	}
+}
