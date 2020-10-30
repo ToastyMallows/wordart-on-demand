@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Simple CSS3 WordArt</title>
+		<title>Wordart On Demand</title>
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 		<script src="js/object-observe-lite.js"></script>
 		<script src="js/wordart.js"></script>
@@ -10,23 +10,25 @@
 				width: 5000px;
 			}
 
-			.wrapper {
+			.positionWrapper {
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				height: 100%;
 				width: 100%;
 			}
-
-			.wrapper .wordart .text {
-				font-size: 150px;
-			}
 		</style>
 	</head>
 	<body id="body">
-		<div class="wrapper">
-			<div id="capture" class="wordart {art_placeholder}">
-				<span class="text" data-text="{word_placeholder}">{word_placeholder}</span>
+		<div class="positionWrapper">
+			<div class="stage">
+				<div class="container">
+					<div class="wrapper">
+						<div id="capture" class="wordart {art_placeholder}">
+							<span class="text" data-text="{word_placeholder}">{word_placeholder}</span>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>

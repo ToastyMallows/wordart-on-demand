@@ -57,7 +57,7 @@ async function generateWordArt(word, art) {
 	magick(tempWordFile).trim().write(wordFile, (err) => {
 		if (err) reject(err);
 		//fs.unlinkSync(tempWordFile);
-		fs.unlinkSync(tempIndexFile);
+		//fs.unlinkSync(tempIndexFile);
 	});
 }
 

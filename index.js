@@ -1,10 +1,7 @@
 const wordartOnDemand = require('./wordartOnDemand');
 const commandLineArgs = require('command-line-args');
-
-const optionDefinitions = [
-	{ name: 'word', alias: 'w', type: String },
-	{ name: 'art', alias: 'a', type: String }
-];
+const commandLineUsage = require('command-line-usage');
+const { EOL } = require('os');
 
 const arts = [
 	'outline','up','arc','squeeze','inverted-arc','basic-stack',
@@ -14,8 +11,52 @@ const arts = [
 	'chrome','marble-slab','gray-block','superhero','horizon','stack-3d'
 ];
 
+const optionDefinitions = [
+	{
+		name: 'word',
+		alias: 'w',
+		type: String,
+		typeLabel: '{underline string}',
+		description: 'The word to turn into wordart (required, outputs to .\\out folder)'
+	},
+	{
+		name: 'art',
+		alias: 'a',
+		type: String,
+		typeLabel: '{underline string}',
+		description: 'The art style to use. (optional, will generate all art styles if omitted)'
+	},
+	{
+		name: 'help',
+		alias: 'h',
+		type: Boolean,
+		description: 'Print this usage guide.'
+	}
+];
+
+const sections = [
+	{
+		header: 'Wordart On Demand',
+		content: 'Generate 90s wordart easily as a transparent PNG.'
+	},
+	{
+		header: 'Options',
+		optionList: optionDefinitions
+	},
+	{
+		header: 'Art Values',
+		content: `The following are all valid art styles to use for the --art argument:${EOL}${EOL}${arts.join(", ")}${EOL}${EOL}Run the following command to see all styles: {bold node index.js -w Example}`
+	}
+];
+
 (async () => {
 	const options = commandLineArgs(optionDefinitions);
+	const usage = commandLineUsage(sections);
+
+	if (options.help) {
+		console.log(usage);
+		return;
+	}
 
 	if (!options.word || options.word === '') {
 		throw new Error("--word (-w) is required");
@@ -28,6 +69,7 @@ const arts = [
 		// generate all
 		for (let index = 0; index < arts.length; index++) {
 			const art = arts[index];
+			console.log(`Generating ${art} wordart...`);
 			await wordartOnDemand.generateWordArt(options.word, art);
 		}
 	}
