@@ -1,14 +1,16 @@
-# WordArt On Demand
+# ![Wordart On Demand](./img/header.png "Wordart On Demand")
 
 A node script and docker container for generating transparent PNGs of 90s MS Wordart.
 
-Built on [css3wordart](https://github.com/arizzitano/css3wordart) written by [Ari Rizzitano](https://github.com/arizzitano).  Inspired by [pythonWordArt](https://github.com/zorbaproject/pythonWordArt) written by [zorbaproject](https://github.com/zorbaproject).  Also inspired by [https://makewordart.com going offline](https://twitter.com/mikemcchillin/status/1319111139838496768).  I figured it's time for everyone to generate their own Wordart locally 🙂
+Built on [css3wordart](https://github.com/arizzitano/css3wordart) written by [Ari Rizzitano](https://github.com/arizzitano).  Inspired by [pythonWordArt](https://github.com/zorbaproject/pythonWordArt) written by [zorbaproject](https://github.com/zorbaproject).  Also inspired by [https://makewordart.com going offline](https://twitter.com/mikemcchillin/status/1319111139838496768).  I figured it's time for everyone to generate their own Wordart locally 🙂\
+&nbsp;
 
-## How
+## ![How It Works](./img/how-it-works.png "How It Works")
 
-The node script parses command line arguments and uses regex to replace text in a template HTML file that will render the wordart when loaded in a browser.  [Puppeteer](https://github.com/puppeteer/puppeteer) is used to load a headless version of Google Chrome and take a screenshot of the page with a transparent background.  That screenshot is then trimmed by [GraphicsMagick](https://github.com/aheckmann/gm) and saved to an output directory.
+The node script parses command line arguments and uses regex to replace text in a template HTML file that will render the wordart when loaded in a browser.  [Puppeteer](https://github.com/puppeteer/puppeteer) is used to load a headless version of Google Chrome and take a screenshot of the page with a transparent background.  That screenshot is then trimmed by [GraphicsMagick](https://github.com/aheckmann/gm) and saved to an output directory.\
+&nbsp;
 
-## Generating PNGs
+## ![Usage Info](./img/usage-info.png "Usage Info")
 
 ### Using Node
 
@@ -46,9 +48,10 @@ If you don't want to install Node/NPM (or you like Docker better), you can gener
 
 #### Mac
 
-Try it out and let me know!  PRs welcome 🙂
+Try it out and let me know!  PRs welcome 🙂\
+&nbsp;
 
-## TODO
+## ![TODO](./img/todo.png "TODO")
 
 - Allow changing output directory via command line argument (when running from Node)
 - Allow making Wordart larger via command line argument
