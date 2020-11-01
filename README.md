@@ -28,7 +28,23 @@ See usage with `--help` (`-h`) to see all supported styles.
 
 If you don't want to install Node/NPM (or you like Docker better), you can generate Wordart PNGs using Docker.  Note that this Docker image will take up ~1 GB, since it needs to download Chromium to render the image in a browser.
 
-#### Windows
+#### Docker Hub Image
+
+You can utilize the prebuilt Docker image that is hosted on Docker Hub:
+
+> <https://hub.docker.com/repository/docker/toastymallows/wordart-on-demand>
+
+```shell
+docker run --rm -v ~/wordart/out:/wordart/out toastymallows/wordart-on-demand:latest -w "Hello World" -a rainbow
+```
+
+Your generated PNG should be located at `/home/<user>/wordart/out` (`\\wsl$\<WSL 2 OS>\home\<wsl2 user>\wordart\out` on Windows via WSL 2.)
+
+#### Build Docker Image manually
+
+If you'd prefer, you can build the Docker image manually.
+
+##### Windows
 
 1. Install [Docker](https://www.docker.com/products/docker-desktop)
 1. Install and setup [WSL 2](https://docs.docker.com/docker-for-windows/wsl/)
@@ -39,14 +55,14 @@ If you don't want to install Node/NPM (or you like Docker better), you can gener
 1. `docker run --rm -v ~/wordart/out:/wordart/out wordart:latest -w "Hello World" -a rainbow`
 1. Your generated PNG should be located at `\\wsl$\<WSL 2 OS>\home\<wsl2 user>\wordart\out` (accessible from Windows Explorer)
 
-#### Linux
+##### Linux
 
 1. Install [Docker](https://www.docker.com/products/docker-desktop)
 1. `docker build -t wordart .`
 1. `docker run --rm -v ~/wordart/out:/wordart/out wordart:latest -w "Hello World" -a rainbow`
 1. Your generated PNG should be located at `/home/<user>/wordart/out`
 
-#### Mac
+##### Mac
 
 Try it out and let me know!  PRs welcome 🙂\
 &nbsp;
