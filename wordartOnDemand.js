@@ -1,66 +1,79 @@
-const puppeteer = require('puppeteer');
-const magick = require('gm').subClass({imageMagick: true});
-const fs = require('fs');
-const path = require('path');
-const replace = require('replace-in-file');
+const wordartOnDemand = require('./lib/wordartOnDemand');
+const commandLineArgs = require('command-line-args');
+const commandLineUsage = require('command-line-usage');
+const { EOL } = require('os');
 
-const wordPlaceholder = '{word_placeholder}';
-const artPlaceholder = '{art_placeholder}';
-const tempWordFile = path.resolve('.\\temp\\temp.png');
-const indexFile = path.resolve('.\\index.html');
+const arts = [
+	'outline','up','arc','squeeze','inverted-arc','basic-stack',
+	'italic-outline','slate','mauve','graydient','red-blue','brown-stack',
+	'radial','purple','green-marble','rainbow','aqua','texture-stack',
+	'paper-bag','sunset','tilt','blues','yellow-dash','green-stack',
+	'chrome','marble-slab','gray-block','superhero','horizon','stack-3d'
+];
 
-function wordartOnDemand() { }
+const optionDefinitions = [
+	{
+		name: 'word',
+		alias: 'w',
+		type: String,
+		typeLabel: '{underline string}',
+		description: 'The word to turn into wordart (required, outputs to .\\out folder)'
+	},
+	{
+		name: 'art',
+		alias: 'a',
+		type: String,
+		typeLabel: '{underline string}',
+		description: 'The art style to use. (optional, will generate all art styles if omitted)'
+	},
+	{
+		name: 'help',
+		alias: 'h',
+		type: Boolean,
+		description: 'Print this usage guide.'
+	}
+];
 
-async function generateWordArt(word, art) {
-	const tempIndexFile = path.resolve('.\\index_' + art + '_temp.html');
+const sections = [
+	{
+		header: 'Wordart On Demand',
+		content: 'Generate 90s wordart easily as a transparent PNG.'
+	},
+	{
+		header: 'Options',
+		optionList: optionDefinitions
+	},
+	{
+		header: 'Art Values',
+		content: `The following are all valid art styles to use for the --art argument:${EOL}${EOL}${arts.join(", ")}${EOL}${EOL}Run the following command to see all styles: {bold node index.js -w Example}`
+	}
+];
 
-	fs.copyFileSync(indexFile, tempIndexFile);
+(async () => {
+	const options = commandLineArgs(optionDefinitions);
+	const usage = commandLineUsage(sections);
 
-	const wordReg = new RegExp(wordPlaceholder, 'g');
-	const wordReplaceOptions = {
-		files: tempIndexFile,
-		from: wordReg,
-		to: word
-	};
+	if (options.help) {
+		console.log(usage);
+		return;
+	}
 
-	const artReg = new RegExp(artPlaceholder, 'g');
-	const artReplaceOptions = {
-		files: tempIndexFile,
-		from: artReg,
-		to: art
-	};
-
-	await replace.replaceInFile(wordReplaceOptions);
-	await replace.replaceInFile(artReplaceOptions);
-
-	const browser = await puppeteer.launch();
-
-	const page = await browser.newPage();
-	page.setViewport({
-		width: 5000,
-		height: 5000
-	});
-	page._emulationManager._client.send(
-		'Emulation.setDefaultBackgroundColorOverride',
-		{ color: { r: 0, g: 0, b: 0, a: 0 } }
-	);
-
-	await page.goto(tempIndexFile);
-
-	await page.screenshot({ path: tempWordFile });
+	if (!options.word || options.word === '') {
+		throw new Error("--word (-w) is required");
+	}
 	
-	await page.close();
-	await browser.close();
-	// TODO: Add timestamp
-	const wordFile = path.resolve('.\\out\\wordart-' + art + '.png');
-
-	magick(tempWordFile).trim().write(wordFile, (err) => {
-		if (err) reject(err);
-		//fs.unlinkSync(tempWordFile);
-		//fs.unlinkSync(tempIndexFile);
-	});
-}
-
-wordartOnDemand.generateWordArt = generateWordArt;
-
-module.exports = wordartOnDemand;
+	if (options.art) {
+		if (arts.indexOf(options.art.toLowerCase()) === -1) {
+			throw new Error("Art style not recognized, see --help for more information.")
+		}
+		// generate one
+		await wordartOnDemand.generateWordArt(options.word, options.art);
+	} else {
+		// generate all
+		for (let index = 0; index < arts.length; index++) {
+			const art = arts[index];
+			console.log(`Generating ${art} wordart...`);
+			await wordartOnDemand.generateWordArt(options.word, art);
+		}
+	}
+})();
