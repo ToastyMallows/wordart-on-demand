@@ -26,6 +26,8 @@ See usage with `--help` (`-h`) to see all supported styles.
 
 ### Using Docker
 
+> ⚠ **Docker images are experimental.**  See the issues section for more information.  It's best to use the NodeJS method for now.
+
 If you don't want to install Node/NPM (or you like Docker better), you can generate Wordart PNGs using Docker.  Note that this Docker image will take up ~1 GB, since it needs to download Chromium to render the image in a browser.
 
 #### Docker Hub Image
@@ -64,7 +66,15 @@ If you'd prefer, you can build the Docker image manually.
 
 ##### Mac
 
-Try it out and let me know!  PRs welcome 🙂\
+Try it out and let me know!  PRs welcome 🙂
+
+#### Issues
+
+There are some issues with Docker images:
+
+- Impact font is not working, affecting some Wordart variations
+
+For now, if you want accurate wordart, it's best to use the NodeJS approach.\
 &nbsp;
 
 ## ![TODO](./img/todo.png "TODO")
