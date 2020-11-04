@@ -17,6 +17,7 @@ The node script parses command line arguments and uses regex to replace text in 
 To Wordart PNGs using nodejs:
 
 1. Install [nodejs and npm](https://nodejs.org/)
+1. Install [GraphicsMagick](http://www.graphicsmagick.org/)
 1. Clone the repo
 1. `npm install`
 1. `npm test` to see all design examples
