@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"description": "generate 90s wordart from a node script or docker container",
 	"scripts": {
-		"test": "node index.js --word Example"
+		"test": "node wordartOnDemand.js --word Example"
 	},
 	"author": "Ross Lancaster",
 	"license": "MIT",
