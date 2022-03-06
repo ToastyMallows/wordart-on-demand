@@ -12,7 +12,7 @@
 		"command-line-usage": "^6.1.0",
 		"gm": "^1.23.1",
 		"object.observe": "^0.2.6",
-		"puppeteer": "^5.4.0",
+		"puppeteer": "^13.4.1",
 		"replace-in-file": "^6.1.0",
 		"slugify": "^1.4.5"
 	}
