@@ -8,12 +8,12 @@
 	"author": "Ross Lancaster",
 	"license": "MIT",
 	"dependencies": {
-		"command-line-args": "^5.1.1",
-		"command-line-usage": "^6.1.0",
-		"gm": "^1.23.1",
+		"command-line-args": "^5.2.1",
+		"command-line-usage": "^7.0.1",
+		"gm": "^1.25.0",
 		"object.observe": "^0.2.6",
-		"puppeteer": "^13.4.1",
-		"replace-in-file": "^6.1.0",
-		"slugify": "^1.4.5"
+		"puppeteer": "^20.2.0",
+		"replace-in-file": "^6.3.5",
+		"slugify": "^1.6.6"
 	}
 }
